@@ -21,11 +21,11 @@ namespace Microsoft.Azure.Functions.Worker.Sdk.Generators
             // Check if the symbol itself is public
             if (methodSymbol.DeclaredAccessibility == Accessibility.Public)
             {
-                // Check if any containing type is not public
+               // Check if any containing type is not public
                 INamedTypeSymbol containingType = methodSymbol.ContainingType;
                 while (containingType != null)
                 {
-                    if (containingType.DeclaredAccessibility != Accessibility.Public)
+                    if (containingType.DeclaredAccessibility != Accessibility.Public || containingType.IsGenericType)
                     {
                         return FunctionMethodVisibility.PublicButContainingTypeNotVisible;
                     }
